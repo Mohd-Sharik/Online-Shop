@@ -1,6 +1,14 @@
 package commonModel;
 
 import org.apache.commons.lang3.StringUtils;
+
+/*
+ * 
+ * @Author Mohd Sharik
+ * 
+   generic class talking between persistance and dao layer for response/request
+*/
+
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 public class DatabaseOperationResult<T> {
