@@ -14,7 +14,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 public class DatabaseOperationResult<T> {
 	
 	
-	private T response;
+	private T modelOrEntity;
 	private PaginationAttribute pageAttribute;
 	private ErrorParameter errorParam;
 	private Boolean sucess;
@@ -27,15 +27,15 @@ public class DatabaseOperationResult<T> {
 	}
 
 
-	public T getResponse() {
-		return response;
+	
+
+	public T getModelOrEntity() {
+		return modelOrEntity;
 	}
 
-
-	public void setResponse(T response) {
-		this.response = response;
+	public void setModelOrEntity(T modelOrEntity) {
+		this.modelOrEntity = modelOrEntity;
 	}
-
 
 	public PaginationAttribute getPageAttribute() {
 		return pageAttribute;
