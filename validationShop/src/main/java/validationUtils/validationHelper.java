@@ -20,9 +20,7 @@ public class validationHelper {
 		{
 			Class noparam[] = {};
 			Method method = object.getClass().getMethod("validate", noparam);
-			
 			String check =  (String)method.invoke(object);
-			
 			return (check != null && !check.isEmpty()) ? check : SUCCESS;
 		}
 		catch (Exception ex) {
