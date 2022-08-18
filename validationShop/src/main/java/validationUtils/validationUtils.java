@@ -71,6 +71,43 @@ public class validationUtils {
 		return "";
 	}
 	
+	public static boolean isBoolean(Object object)
+	{
+		if(isEmpty(object))
+		{
+			try
+			{
+				if(Boolean.parseBoolean(object.toString()) == true)
+				{
+					return true;
+				}
+				else
+				if(Boolean.parseBoolean(object.toString()) == false)
+				{
+					if("false".equalsIgnoreCase(object.toString()))
+							{
+						return true;
+							}
+					else
+					{
+						return false;
+					}
+				}
+				else
+				{
+					return false;
+				}
+			}
+			catch (Exception e) {
+				// TODO: handle exception
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	
+	
 	public static class NumberUtils
 	{
 		public static boolean isNumaric(Object object)
