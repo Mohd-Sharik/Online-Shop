@@ -1,7 +1,8 @@
 package com.jpa.test.shopService;
 
-import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
+
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -9,13 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import com.jpa.test.shopModel.TbOsDbErrModel;
 
 import UtilModel.FilterParameter;
 import commonModel.DatabaseOperationResult;
+import commonModel.PaginationAttribute;
 import commonModel.ServiceOperationResult;
 import commonUtilMethods.FilterUtil;
 import commonUtilMethods.SearchCriteria;
@@ -38,7 +39,19 @@ public class TbOsDbErrService {
 		
 		try
 		{
-			DatabaseOperationResult<List<TbOsDbErrEntity>> bdList = getDbErr(filterparameter);
+			DatabaseOperationResult<List<TbOsDbErrEntity>> dbList = getDbErr(filterparameter);
+			List<TbOsDbErrModel> list = new ArrayList<>();
+			for(TbOsDbErrEntity entity : dbList.getModelOrEntity())
+			{
+				TbOsDbErrModel model = new TbOsDbErrModel();
+				
+				setEntityToModel(entity, model);
+				
+				list.add(model);
+			}
+			response.setPageAttribute(dbList.getPageAttribute());
+			response.setResponse(list);
+			
 			
 			
 		}
@@ -49,8 +62,20 @@ public class TbOsDbErrService {
 		return response;
 		
 	}
+	//here we doing operation to set record from entity to model
+	private void setEntityToModel(TbOsDbErrEntity entity, TbOsDbErrModel model)
+	{
+		model.setId(entity.getId());
+		model.setRefCd(entity.getRefCd());
+		model.setErrCd(entity.getErrCd());
+		model.setErrMsg(entity.getErrMsg());
+		model.setRefNm(entity.getRefNm());
+		model.setCrtBy(entity.getCrtBy());
+		model.setCrtTs(entity.getCrtTs());
+		model.setCrtTsString(null);
+	}
 	
-	public DatabaseOperationResult<List<TbOsDbErrEntity>> getDbErr(FilterParameter filterparameter) throws Exception
+	private DatabaseOperationResult<List<TbOsDbErrEntity>> getDbErr(FilterParameter filterparameter) throws Exception
 	{
 		DatabaseOperationResult<List<TbOsDbErrEntity>> modelOrEntity = new DatabaseOperationResult<>();
 		
@@ -93,6 +118,15 @@ public class TbOsDbErrService {
 			dbEntityList = dbErrPersistance.findAll(filterUtil.getSpecification(list1), page);
 		}
 		
+		PaginationAttribute pageAttr = modelOrEntity.getPageAttribute();
+		pageAttr.setPageIndex(filterparameter.getPageIndex());
+		pageAttr.setTotalPages((int) Math.ceil(totalRecord.intValue() * 1.0 / showRecordOnOnePage));
+		pageAttr.setFetchrecords(dbEntityList.size());
+		pageAttr.setShowRecordOnOnePage(showRecordOnOnePage);
+		pageAttr.setTotalRecords(totalRecord);
+		modelOrEntity.setModelOrEntity(dbEntityList);
+
+		return modelOrEntity;
 		
 		
 	}
@@ -128,6 +162,20 @@ public class TbOsDbErrService {
 		
 		return response;
 	}
+	
+	
+	
+	 public String SqlErrCode(Exception e) {
+		    SQLException result = null;
+		    Throwable throwable = e;
+		    while (throwable != null && !(throwable instanceof SQLException)) {
+		        throwable = throwable.getCause();
+		    }
+		    if (throwable instanceof SQLException) {
+		        result = (SQLException) throwable;
+		    }
+		    return result!=null? String.valueOf(result.getErrorCode()):null;
+		} 
 	
 
 }
