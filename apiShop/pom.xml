@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.7.3</version>
+		<relativePath /> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>Online-API</groupId>
+	<artifactId>apiShop</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>apiShop</name>
+	<description>shopCommonApi</description>
+	<properties>
+		<java.version>1.8</java.version>
+		<API-validation-version>0.0.1-SNAPSHOT</API-validation-version>
+		<API-loggingShop-version>0.0.1-SNAPSHOT</API-loggingShop-version>
+		<API-shopCommon-version>0.0.1-SNAPSHOT</API-shopCommon-version>
+		<org.json-version>20211205</org.json-version>
+		<com.googlecode.json-simple-version>1.1.1</com.googlecode.json-simple-version>
+		<org.hibernate-ehchache-version>6.0.0.Alpha6</org.hibernate-ehchache-version>
+		<org.springdoc-openapi-ui-version>1.6.10</org.springdoc-openapi-ui-version>
+		<com.oracle.jdbc-ojdbc8-version>19.3.0.0</com.oracle.jdbc-ojdbc8-version>
+
+		<boot-starter-data-jpa-version>2.7.3</boot-starter-data-jpa-version>
+		<org.springframework.boot-starter-web-version>2.7.2</org.springframework.boot-starter-web-version>
+		<org.spring-boot-starter-web-services-version>2.7.2</org.spring-boot-starter-web-services-version>
+		<org.spring-boot-starter-data-rest-version>2.7.2</org.spring-boot-starter-data-rest-version>
+		<org.springframework.spring-boot-starter-test-version>2.7.2</org.springframework.spring-boot-starter-test-version>
+		<org.springframework.boot-starter-logging-version>2.7.2</org.springframework.boot-starter-logging-version>
+		<org.springframework.spring-boot-starter-version>2.7.2</org.springframework.spring-boot-starter-version>
+		<commons-codec-version>1.14</commons-codec-version>
+		<javax.servlet-version>4.0.1</javax.servlet-version>
+		<spring-web-version>5.3.20</spring-web-version>
+
+
+	</properties>
+	<dependencies>
+
+		<!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>4.0.1</version><!--$NO-MVN-MAN-VER$ -->
+			<scope>provided</scope>
+		</dependency>
+
+
+		<!-- https://mvnrepository.com/artifact/org.json/json -->
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>${org.json-version}</version>
+		</dependency>
+
+
+		<!-- https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple -->
+		<dependency>
+			<groupId>com.googlecode.json-simple</groupId>
+			<artifactId>json-simple</artifactId>
+			<version>${com.googlecode.json-simple-version}</version>
+		</dependency>
+
+
+		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-ehcache -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-ehcache</artifactId>
+			<version>${org.hibernate-ehchache-version}</version>
+			<type>pom</type>
+		</dependency>
+
+
+		<!-- https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-ui -->
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-ui</artifactId>
+			<version>${org.springdoc-openapi-ui-version}</version>
+		</dependency>
+
+
+		<!-- https://mvnrepository.com/artifact/com.oracle.jdbc/ojdbc8 -->
+		<dependency>
+			<groupId>com.oracle.jdbc</groupId>
+			<artifactId>ojdbc8</artifactId>
+			<version>${com.oracle.jdbc-ojdbc8-version}</version>
+		</dependency>
+
+
+
+		<!-- https://mvnrepository.com/artifact/javax.servlet/servlet-api <dependency> 
+			<groupId>javax.servlet</groupId> <artifactId>servlet-api</artifactId> <version>${javax.servlet-api-version}</version> 
+			<scope>provided</scope> </dependency> -->
+
+		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-jpa -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+			<version>${boot-starter-data-jpa-version}</version><!--$NO-MVN-MAN-VER$ -->
+		</dependency>
+
+
+		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+			<version>${org.springframework.boot-starter-web-version}</version>
+		</dependency>
+
+
+		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web-services -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web-services</artifactId>
+			<version>${org.spring-boot-starter-web-services-version}</version>
+		</dependency>
+
+
+		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-rest -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-rest</artifactId>
+			<version>${org.spring-boot-starter-data-rest-version}</version>
+		</dependency>
+
+
+		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-test -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<version>${org.springframework.spring-boot-starter-test-version}</version>
+			<scope>test</scope>
+		</dependency>
+
+
+		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-logging -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-logging</artifactId>
+			<version>${org.springframework.boot-starter-logging-version}</version>
+		</dependency>
+
+
+		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter</artifactId>
+			<version>${org.springframework.spring-boot-starter-version}</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/commons-codec/commons-codec -->
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>${commons-codec-version}</version>
+		</dependency>
+
+		<!-- add own dependency in pom.xml -->
+		<dependency>
+			<groupId>Online-API</groupId>
+			<artifactId>shopCommon</artifactId>
+			<version>${API-shopCommon-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>Online-API</groupId>
+			<artifactId>logginShop</artifactId>
+			<version>${API-loggingShop-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>Online-API</groupId>
+			<artifactId>validationShop</artifactId>
+			<version>${API-validation-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-web -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${spring-web-version}</version>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
