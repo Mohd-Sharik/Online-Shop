@@ -18,6 +18,8 @@ import UtilModel.FilterParameter;
 import commonModel.DatabaseOperationResult;
 import commonModel.PaginationAttribute;
 import commonModel.ServiceOperationResult;
+import commonUtilMethods.CommonConstant;
+import commonUtilMethods.CommonUtilityHelper;
 import commonUtilMethods.FilterUtil;
 import commonUtilMethods.SearchCriteria;
 import commonUtilMethods.SearchOperation;
@@ -26,45 +28,37 @@ import shopPersistance.TbOsDbErrPersistance;
 
 @Service
 public class TbOsDbErrService {
-	
+
 	@Autowired
 	private TbOsDbErrPersistance dbErrPersistance;
-	
-	
-	//getting dbErr list of all record for table
-	public ServiceOperationResult<List<TbOsDbErrModel>> dbErrList(FilterParameter filterparameter)
-	{
+
+	// getting dbErr list of all record for table
+	public ServiceOperationResult<List<TbOsDbErrModel>> dbErrList(FilterParameter filterparameter) {
 		ServiceOperationResult<List<TbOsDbErrModel>> response = new ServiceOperationResult<>();
-		
-		
-		try
-		{
+
+		try {
 			DatabaseOperationResult<List<TbOsDbErrEntity>> dbList = getDbErr(filterparameter);
 			List<TbOsDbErrModel> list = new ArrayList<>();
-			for(TbOsDbErrEntity entity : dbList.getModelOrEntity())
-			{
+			for (TbOsDbErrEntity entity : dbList.getModelOrEntity()) {
 				TbOsDbErrModel model = new TbOsDbErrModel();
-				
+
 				setEntityToModel(entity, model);
-				
+
 				list.add(model);
 			}
 			response.setPageAttribute(dbList.getPageAttribute());
 			response.setResponse(list);
-			
-			
-			
-		}
-		catch (Exception e) {
+
+		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("Exception in DbErr List Service : ");
 		}
 		return response;
-		
+
 	}
-	//here we doing operation to set record from entity to model
-	private void setEntityToModel(TbOsDbErrEntity entity, TbOsDbErrModel model)
-	{
+
+	// here we doing operation to set record from entity to model
+	private void setEntityToModel(TbOsDbErrEntity entity, TbOsDbErrModel model) {
 		model.setId(entity.getId());
 		model.setRefCd(entity.getRefCd());
 		model.setErrCd(entity.getErrCd());
@@ -72,52 +66,48 @@ public class TbOsDbErrService {
 		model.setRefNm(entity.getRefNm());
 		model.setCrtBy(entity.getCrtBy());
 		model.setCrtTs(entity.getCrtTs());
-		model.setCrtTsString(null);
+		model.setCrtTsString(CommonUtilityHelper.DateUtil.getStringFromDate(entity.getCrtTs(),
+				CommonConstant.DateFormat.DD_MMM_YYYY_HHMMSS_SSS_A));
 	}
-	
-	private DatabaseOperationResult<List<TbOsDbErrEntity>> getDbErr(FilterParameter filterparameter) throws Exception
-	{
+
+	private DatabaseOperationResult<List<TbOsDbErrEntity>> getDbErr(FilterParameter filterparameter) throws Exception {
 		DatabaseOperationResult<List<TbOsDbErrEntity>> modelOrEntity = new DatabaseOperationResult<>();
-		
+
 		List<TbOsDbErrEntity> dbEntityList = new ArrayList<>();
-		//calculate pagination
-		Integer showRecordOnOnePage = filterparameter.getRecordToShowOnOnePage() != null ? filterparameter.getRecordToShowOnOnePage() : 25;
+		// calculate pagination
+		Integer showRecordOnOnePage = filterparameter.getRecordToShowOnOnePage() != null
+				? filterparameter.getRecordToShowOnOnePage()
+				: 25;
 		Integer from = filterparameter.getPageIndex();
 		Integer to = showRecordOnOnePage;
 		Long totalRecord = filterparameter.getRecordTotal();
-		
-		//Business Logic
+
+		// Business Logic
 		String id = filterparameter.getId();
 		String refCd = filterparameter.getRefCd();
-		
-		
+
 		List<SearchCriteria> list1 = new ArrayList<>();
 		SearchCriteria sc = new SearchCriteria();
-		
-		
-		if(StringUtils.isNoneEmpty(id))
-		{
+
+		if (StringUtils.isNoneEmpty(id)) {
 			sc = new SearchCriteria("id", id, SearchOperation.EQUAL);
 			list1.add(sc);
 		}
-		if(StringUtils.isNotEmpty(refCd))
-		{
+		if (StringUtils.isNotEmpty(refCd)) {
 			sc = new SearchCriteria("refCd", refCd, SearchOperation.EQUAL);
 			list1.add(sc);
 		}
-		
+
 		FilterUtil<TbOsDbErrEntity> filterUtil = new FilterUtil<>();
-		
-		if(totalRecord == null)
-		{
+
+		if (totalRecord == null) {
 			totalRecord = dbErrPersistance.count(filterUtil.getSpecification(list1));
 		}
-		if(from != null && to != null)
-		{
-			Pageable page = PageRequest.of(from, to, Sort.by(Sort.Direction.DESC,"id"));
+		if (from != null && to != null) {
+			Pageable page = PageRequest.of(from, to, Sort.by(Sort.Direction.DESC, "id"));
 			dbEntityList = dbErrPersistance.findAll(filterUtil.getSpecification(list1), page);
 		}
-		
+
 		PaginationAttribute pageAttr = modelOrEntity.getPageAttribute();
 		pageAttr.setPageIndex(filterparameter.getPageIndex());
 		pageAttr.setTotalPages((int) Math.ceil(totalRecord.intValue() * 1.0 / showRecordOnOnePage));
@@ -127,55 +117,45 @@ public class TbOsDbErrService {
 		modelOrEntity.setModelOrEntity(dbEntityList);
 
 		return modelOrEntity;
-		
-		
+
 	}
-	
-	
-	//save bdErr record in the table
-	public ServiceOperationResult<TbOsDbErrModel> saveDbErr(TbOsDbErrModel model)
-	{
+
+	// save bdErr record in the table
+	public ServiceOperationResult<TbOsDbErrModel> saveDbErr(TbOsDbErrModel model) {
 		ServiceOperationResult<TbOsDbErrModel> response = new ServiceOperationResult<>();
-		try
-		{
+		try {
 			TbOsDbErrEntity entity = new TbOsDbErrEntity();
-			
-			
+
 			entity.setRefCd(model.getRefCd());
 			entity.setErrCd(model.getErrCd());
 			entity.setErrMsg(model.getErrMsg());
 			entity.setRefNm(model.getRefNm());
-			String crt = model.getCrtBy() != null ? model.getCrtBy() : "SYSTEM" ;
+			String crt = model.getCrtBy() != null ? model.getCrtBy() : "SYSTEM";
 			entity.setCrtBy(crt);
-			
-			
+
 			dbErrPersistance.save(entity);
 			response.setResponse(model);
-			
-		}catch (Exception e) {
-			
+
+		} catch (Exception e) {
+
 			e.printStackTrace();
 			System.out.println("occure in the DbErr Service Catch block");
-			
+
 		}
-		
-		
+
 		return response;
 	}
-	
-	
-	
-	 public String SqlErrCode(Exception e) {
-		    SQLException result = null;
-		    Throwable throwable = e;
-		    while (throwable != null && !(throwable instanceof SQLException)) {
-		        throwable = throwable.getCause();
-		    }
-		    if (throwable instanceof SQLException) {
-		        result = (SQLException) throwable;
-		    }
-		    return result!=null? String.valueOf(result.getErrorCode()):null;
-		} 
-	
+
+	public String SqlErrCode(Exception e) {
+		SQLException result = null;
+		Throwable throwable = e;
+		while (throwable != null && !(throwable instanceof SQLException)) {
+			throwable = throwable.getCause();
+		}
+		if (throwable instanceof SQLException) {
+			result = (SQLException) throwable;
+		}
+		return result != null ? String.valueOf(result.getErrorCode()) : null;
+	}
 
 }
