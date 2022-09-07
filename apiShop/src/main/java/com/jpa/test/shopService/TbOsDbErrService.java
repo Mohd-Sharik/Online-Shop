@@ -23,6 +23,8 @@ import commonUtilMethods.CommonUtilityHelper;
 import commonUtilMethods.FilterUtil;
 import commonUtilMethods.SearchCriteria;
 import commonUtilMethods.SearchOperation;
+import exception.BusinessException;
+import exception.DatabaseException;
 import shopEntity.TbOsDbErrEntity;
 import shopPersistance.TbOsDbErrPersistance;
 
@@ -49,9 +51,11 @@ public class TbOsDbErrService {
 			response.setPageAttribute(dbList.getPageAttribute());
 			response.setResponse(list);
 
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println("Exception in DbErr List Service : ");
+		} catch (DatabaseException e) {
+			throw new BusinessException(e);
+		}
+		catch (Exception e2) {
+			throw new BusinessException(e2);
 		}
 		return response;
 
@@ -136,11 +140,12 @@ public class TbOsDbErrService {
 			dbErrPersistance.save(entity);
 			response.setResponse(model);
 
-		} catch (Exception e) {
-
-			e.printStackTrace();
-			System.out.println("occure in the DbErr Service Catch block");
-
+		} catch (DatabaseException e) {
+			throw new BusinessException(e);
+		}
+		catch(Exception e2)
+		{
+			throw new BusinessException(e2);
 		}
 
 		return response;
