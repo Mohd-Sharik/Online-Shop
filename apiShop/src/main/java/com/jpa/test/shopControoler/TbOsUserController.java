@@ -1,4 +1,4 @@
-package com.jpa.test;
+package com.jpa.test.shopControoler;
 
 import java.util.List;
 
