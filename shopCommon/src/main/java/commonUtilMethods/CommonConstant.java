@@ -7,6 +7,17 @@ public class CommonConstant {
 	public static final String SPACE = " ";
 	public static final String FROM = "FROM";
 	public static final String TO = "TO";
+	public static final String EXCEPTION_MSG_LIST = "error in list and error in {} ";
+	public static final String NOCODE = "NOCODE";
+	public static final String ERRCONSTANT = "unexpacted Error ";
+	public static final String LOGCONSTANT = "check log for error: ";
+	
+	
+	//pagination 
+	public static final Integer showRecord = 25;
+	
+	
+	
 	
 	// this class use for Date format 
 	public static final class DateFormat {

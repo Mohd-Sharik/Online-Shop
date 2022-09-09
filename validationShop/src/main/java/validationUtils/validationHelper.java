@@ -14,7 +14,8 @@ public class validationHelper {
 	
 	private static final String SUCCESS = "SUCCESS";
 	
-	public String checkValidatio(Object object)
+	@SuppressWarnings("rawtypes")
+	public static String checkValidation(Object object)
 	{
 		try
 		{

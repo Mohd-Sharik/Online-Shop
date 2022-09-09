@@ -31,8 +31,9 @@ import shopPersistance.TbOsDbErrPersistance;
 @Service
 public class TbOsDbErrService {
 
-	@Autowired
+	@Autowired(required = false)
 	private TbOsDbErrPersistance dbErrPersistance;
+	
 
 	// getting dbErr list of all record for table
 	public ServiceOperationResult<List<TbOsDbErrModel>> dbErrList(FilterParameter filterparameter) {
@@ -125,7 +126,7 @@ public class TbOsDbErrService {
 	}
 
 	// save bdErr record in the table
-	public ServiceOperationResult<TbOsDbErrModel> saveDbErr(TbOsDbErrModel model) {
+	public ServiceOperationResult<TbOsDbErrModel> save(TbOsDbErrModel model) {
 		ServiceOperationResult<TbOsDbErrModel> response = new ServiceOperationResult<>();
 		try {
 			TbOsDbErrEntity entity = new TbOsDbErrEntity();

@@ -12,6 +12,10 @@ public class FilterParameter {
 		private @QueryParam("recordTotal") Long recordTotal;
 		private @QueryParam("id") String id = "";
 		private @QueryParam("refCd") String refCd = "";
+		private @QueryParam("fullNm") String fullNm = "";
+		private @QueryParam("dsplNm") String dsplNm = "";
+		private @QueryParam("cntctNumber") String cntctNumber = "";
+		
 		
 		
 		
@@ -52,6 +56,24 @@ public class FilterParameter {
 		}
 		public void setRefCd(String refCd) {
 			this.refCd = refCd;
+		}
+		public String getFullNm() {
+			return fullNm;
+		}
+		public void setFullNm(String fullNm) {
+			this.fullNm = fullNm;
+		}
+		public String getDsplNm() {
+			return dsplNm;
+		}
+		public void setDsplNm(String dsplNm) {
+			this.dsplNm = dsplNm;
+		}
+		public String getCntctNumber() {
+			return cntctNumber;
+		}
+		public void setCntctNumber(String cntctNumber) {
+			this.cntctNumber = cntctNumber;
 		}
 		
 		
