@@ -13,18 +13,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.jpa.test.commonModel.ServiceOperationResult;
+import com.jpa.test.commonUtilMethods.CommonConstant;
 import com.jpa.test.shopModel.TbOsDbErrModel;
 import com.jpa.test.shopModel.TbOsUserModel;
 import com.jpa.test.shopService.TbOsDbErrService;
 import com.jpa.test.shopService.TbOsUserService;
 
 import UtilModel.FilterParameter;
-import ch.qos.logback.classic.Logger;
-import commonModel.ServiceOperationResult;
-import commonUtilMethods.CommonConstant;
 import logginShopLogging.ILogger;
 import logginShopLogging.LoggerFactory;
-import validationUtils.validationException;
 import validationUtils.validationHelper;
 
 @RestController
@@ -57,6 +55,7 @@ public class TbOsUserController {
 		try
 		{
 			result = userService.userList(filter);
+			
 			validationHelper.checkValidation(result);
 			
 		}
@@ -74,9 +73,6 @@ public class TbOsUserController {
 					CommonConstant.ERRCONSTANT + request.getServletPath() + CommonConstant.LOGCONSTANT);
 			
 		}
-		
-		
-		
 		
 		return result;
 	}

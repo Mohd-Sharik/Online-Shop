@@ -1,4 +1,4 @@
-package commonModel;
+package com.jpa.test.commonModel;
 
 public class PaginationAttribute {
 	

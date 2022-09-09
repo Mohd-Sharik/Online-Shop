@@ -1,4 +1,4 @@
-package shopEntity;
+package com.jpa.test.shopEntity;
 
 import java.io.Serializable;
 import java.util.Date;

@@ -1,4 +1,4 @@
-package commonUtilMethods;
+package com.jpa.test.commonUtilMethods;
 
 import java.util.ArrayList;
 import java.util.List;

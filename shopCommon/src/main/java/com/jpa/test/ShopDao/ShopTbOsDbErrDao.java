@@ -1,12 +1,12 @@
-package ShopDao;
+package com.jpa.test.ShopDao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
-import shopEntity.TbOsUserEntity;
+import com.jpa.test.shopEntity.TbOsDbErrEntity;
 
 @Repository
-public interface ShopTbOsUserDao extends JpaSpecificationExecutor<TbOsUserEntity>, JpaRepository<TbOsUserEntity, Long> {
+public interface ShopTbOsDbErrDao extends JpaSpecificationExecutor<TbOsDbErrEntity>, JpaRepository<TbOsDbErrEntity, Long> {
 
 }

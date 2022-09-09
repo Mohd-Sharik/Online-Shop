@@ -1,4 +1,4 @@
-package commonUtilMethods;
+package com.jpa.test.commonUtilMethods;
 
 public class CommonConstant {
 	

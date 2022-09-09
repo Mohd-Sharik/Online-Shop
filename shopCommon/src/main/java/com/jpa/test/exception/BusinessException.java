@@ -1,4 +1,4 @@
-package exception;
+package com.jpa.test.exception;
 
 public class BusinessException extends NestedException {
 	

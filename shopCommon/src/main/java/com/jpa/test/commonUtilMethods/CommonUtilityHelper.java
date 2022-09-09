@@ -1,4 +1,4 @@
-package commonUtilMethods;
+package com.jpa.test.commonUtilMethods;
 
 
 import java.text.ParseException;
@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-import commonUtilMethods.CommonConstant.DateFormat;
+import com.jpa.test.commonUtilMethods.CommonConstant.DateFormat;
 
 
 public class CommonUtilityHelper {

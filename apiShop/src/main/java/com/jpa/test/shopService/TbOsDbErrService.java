@@ -12,26 +12,26 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import com.jpa.test.commonModel.DatabaseOperationResult;
+import com.jpa.test.commonModel.PaginationAttribute;
+import com.jpa.test.commonModel.ServiceOperationResult;
+import com.jpa.test.commonUtilMethods.CommonConstant;
+import com.jpa.test.commonUtilMethods.CommonUtilityHelper;
+import com.jpa.test.commonUtilMethods.FilterUtil;
+import com.jpa.test.commonUtilMethods.SearchCriteria;
+import com.jpa.test.commonUtilMethods.SearchOperation;
+import com.jpa.test.exception.BusinessException;
+import com.jpa.test.exception.DatabaseException;
+import com.jpa.test.shopEntity.TbOsDbErrEntity;
 import com.jpa.test.shopModel.TbOsDbErrModel;
+import com.jpa.test.shopPersistance.TbOsDbErrPersistance;
 
 import UtilModel.FilterParameter;
-import commonModel.DatabaseOperationResult;
-import commonModel.PaginationAttribute;
-import commonModel.ServiceOperationResult;
-import commonUtilMethods.CommonConstant;
-import commonUtilMethods.CommonUtilityHelper;
-import commonUtilMethods.FilterUtil;
-import commonUtilMethods.SearchCriteria;
-import commonUtilMethods.SearchOperation;
-import exception.BusinessException;
-import exception.DatabaseException;
-import shopEntity.TbOsDbErrEntity;
-import shopPersistance.TbOsDbErrPersistance;
 
 @Service
 public class TbOsDbErrService {
 
-	@Autowired(required = false)
+	@Autowired
 	private TbOsDbErrPersistance dbErrPersistance;
 	
 

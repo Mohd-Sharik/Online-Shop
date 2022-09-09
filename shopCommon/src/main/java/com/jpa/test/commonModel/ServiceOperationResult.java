@@ -1,4 +1,4 @@
-package commonModel;
+package com.jpa.test.commonModel;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;

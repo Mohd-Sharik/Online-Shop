@@ -1,4 +1,4 @@
-package shopPersistance;
+package com.jpa.test.shopPersistance;
 
 import java.util.List;
 import java.util.Optional;
@@ -9,8 +9,8 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import ShopDao.ShopTbOsUserDao;
-import shopEntity.TbOsUserEntity;
+import com.jpa.test.ShopDao.ShopTbOsUserDao;
+import com.jpa.test.shopEntity.TbOsUserEntity;
 
 @Component
 @Transactional(readOnly = true)
