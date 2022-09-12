@@ -1,4 +1,4 @@
-package logginShopLogging;
+package com.jpa.test.loggingShopLogging;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;

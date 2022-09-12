@@ -1,4 +1,4 @@
-package validationUtils;
+package com.jpa.test.validationUtils;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

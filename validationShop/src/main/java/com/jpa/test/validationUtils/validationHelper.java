@@ -1,4 +1,4 @@
-package validationUtils;
+package com.jpa.test.validationUtils;
 
 import java.lang.reflect.Method;
 
@@ -30,7 +30,7 @@ public class validationHelper {
 		}
 	}
 	
-	public String checkValidationAndThrow(Object object)
+	public static String checkValidationAndThrow(Object object)
 	{
 		try
 		{

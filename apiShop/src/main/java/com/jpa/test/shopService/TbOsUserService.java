@@ -38,16 +38,18 @@ public class TbOsUserService {
 		try {
 			DatabaseOperationResult<List<TbOsUserEntity>> dbList = userDb(filter);
 
-			List<TbOsUserModel> list = new ArrayList<TbOsUserModel>();
-			for (TbOsUserEntity entity : dbList.getModelOrEntity()) {
-				TbOsUserModel model = new TbOsUserModel();
+			
+				List<TbOsUserModel> list = new ArrayList<TbOsUserModel>();
+				for (TbOsUserEntity entity : dbList.getModelOrEntity()) {
+					TbOsUserModel model = new TbOsUserModel();
 
-				setEntityToModel(entity, model);
-				list.add(model);
-			}
+					setEntityToModel(entity, model);
+					list.add(model);
+				}
 
-			response.setPageAttribute(dbList.getPageAttribute());
-			response.setResponse(list);
+				response.setPageAttribute(dbList.getPageAttribute());
+				response.setResponse(list);
+			
 
 		} catch (DatabaseException e) {
 			throw new BusinessException(e);

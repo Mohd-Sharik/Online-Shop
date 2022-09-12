@@ -1,4 +1,4 @@
-package validationUtils;
+package com.jpa.test.validationUtils;
 
 public class validationException extends RuntimeException {
 
