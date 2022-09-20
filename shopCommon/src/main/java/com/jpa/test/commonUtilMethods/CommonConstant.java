@@ -11,6 +11,10 @@ public class CommonConstant {
 	public static final String NOCODE = "NOCODE";
 	public static final String ERRCONSTANT = "unexpacted Error ";
 	public static final String LOGCONSTANT = "check log for error: ";
+	public static final String SUCCESS = "SUCCESS";
+	
+	public static final String ALPH_NMR_STR = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"+"abcdefghijklmnopqrstuvwxyz"+"#$%&*"+"1234567890";
+	
 	
 	
 	//pagination 

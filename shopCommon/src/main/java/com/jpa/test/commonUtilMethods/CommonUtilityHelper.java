@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Random;
 
 import com.jpa.test.commonUtilMethods.CommonConstant.DateFormat;
 
@@ -249,6 +250,21 @@ public class CommonUtilityHelper {
 			cal.setTime(startTime);
 			return cal;
 		}
+	}
+	
+	
+	public static String getAlphaNumericString(int n)
+	{
+		StringBuilder sb = new StringBuilder();
+		Random ran = new Random();
+		for(int i =0; i <= n; i++)
+		{
+			int index = (int)( CommonConstant.ALPH_NMR_STR.length() * ran.nextDouble());
+			
+			sb.append(CommonConstant.ALPH_NMR_STR.charAt(index));
+		}
+		
+		return sb.toString();
 	}
 
 }

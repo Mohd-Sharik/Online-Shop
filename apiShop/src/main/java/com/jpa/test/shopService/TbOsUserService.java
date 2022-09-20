@@ -1,6 +1,7 @@
 package com.jpa.test.shopService;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -23,6 +24,7 @@ import com.jpa.test.exception.DatabaseException;
 import com.jpa.test.shopEntity.TbOsUserEntity;
 import com.jpa.test.shopModel.TbOsUserModel;
 import com.jpa.test.shopPersistance.TbOsUSerPersistance;
+import com.jpa.test.validationUtils.validationHelper;
 
 import UtilModel.FilterParameter;
 
@@ -103,8 +105,8 @@ public class TbOsUserService {
 
 		Integer showRecordOnOnePage = filter.getRecordToShowOnOnePage() != null ? filter.getRecordToShowOnOnePage()
 				: CommonConstant.showRecord;
-		Integer to = filter.getPageIndex();
-		Integer from = showRecordOnOnePage;
+		Integer to = showRecordOnOnePage;
+		Integer from = filter.getPageIndex();
 		Long totalRecord = filter.getRecordTotal();
 
 		// business Logic
@@ -116,22 +118,22 @@ public class TbOsUserService {
 		String dsplNm = filter.getDsplNm();
 		String cntctNumber = filter.getCntctNumber();
 
-		if (StringUtils.isEmpty(id)) {
+		if (StringUtils.isNotBlank(id)) {
 			sc = new SearchCriteria("id", id, SearchOperation.EQUAL);
 			list.add(sc);
 		}
 
-		if (StringUtils.isEmpty(fullNm)) {
+		if (StringUtils.isNotBlank(fullNm)) {
 			sc = new SearchCriteria("fullNm", fullNm, SearchOperation.MATCH);
 			list.add(sc);
 		}
 
-		if (StringUtils.isEmpty(dsplNm)) {
+		if (StringUtils.isNotBlank(dsplNm)) {
 			sc = new SearchCriteria("dsplNm", dsplNm, SearchOperation.MATCH);
 			list.add(sc);
 		}
 
-		if (StringUtils.isEmpty(cntctNumber)) {
+		if (StringUtils.isNotBlank(cntctNumber)) {
 			sc = new SearchCriteria("cntctNumber", cntctNumber, SearchOperation.MATCH);
 			list.add(sc);
 		}
@@ -142,7 +144,7 @@ public class TbOsUserService {
 		}
 
 		if (to != null && from != null) {
-			Pageable page = PageRequest.of(from, to, Sort.by(Sort.Direction.ASC, "id"));
+			Pageable page = PageRequest.of(from, to, Sort.by(Sort.Direction.DESC, "id"));
 			modelOrEntity = userPersistance.findAll(filterUtil.getSpecification(list), page);
 		}
 
@@ -157,5 +159,149 @@ public class TbOsUserService {
 
 		return dbList;
 	}
+	
+	
+	
+	
+	//add or Update User
+	
+	public ServiceOperationResult<TbOsUserModel> addOrUpdate(TbOsUserModel model)
+	{
+		ServiceOperationResult<TbOsUserModel> response = new ServiceOperationResult<>();
+		
+		try
+		{
+			String valiResult = CommonConstant.SUCCESS;
+			
+			Long id = model.getId() != null ? model.getId() : null;
+			
+			String mail = model.getEmail();
+			
+			String contact = model.getCntctNumber();
+			
+			List<TbOsUserEntity> record = userPersistance.findAll();   // get All record of user's from database
+			
+			for(TbOsUserEntity en : record)         // check every  user-Detail to current user-Detail  
+			{
+				if(id == null) 
+				{
+					if(mail.equalsIgnoreCase(en.getEmail()))
+					{
+						valiResult = "Email Already exist : "+en.getEmail();
+					}
+				}
+					else
+					{
+						if(id.longValue() != en.getId().longValue() && mail.equalsIgnoreCase(en.getEmail()))
+						{
+							valiResult = "Email already exist : "+en.getEmail();
+						}
+					}
+				
+				if(id == null)
+				{
+					if(contact.equalsIgnoreCase(en.getCntctNum()))
+					{
+						valiResult = "Contact Number Already Exist : "+en.getCntctNum();
+					}
+				}
+				else
+				{
+					if(id.longValue() != en.getId().longValue() && contact.equalsIgnoreCase(en.getCntctNum()))
+					{
+						valiResult = "Contact Number Already Exist : "+en.getCntctNum();
+					}
+				}
+				
+				
+			}
+			
+			if(valiResult == CommonConstant.SUCCESS)
+			{	
+				if(id != null)
+				{
+					
+					TbOsUserEntity entity = userPersistance.findById(id).get();
+					
+					entity.setId(id);
+					setModelToEntity(model, entity);
+					entity.setUpdBy(model.getCrtBy());
+					entity.setUpdTs(new Date());
+					
+					userPersistance.save(entity);
+				}
+				else
+				{
+					TbOsUserEntity entity = new TbOsUserEntity();
+					entity.setId(null);
+					String password = CommonUtilityHelper.getAlphaNumericString(16);
+					entity.setPswd(password);
+					setModelToEntity(model, entity);
+					
+					entity.setCrtBy(model.getCrtBy());
+					entity.setCrtTs(new Date());
+					userPersistance.save(entity);
+					
+				}
+				response.setResponse(model);
+				
+			}
+			else
+			{
+				response.setSucces(false);
+				response.getErrParam().setErrCode("No-Code");
+				response.getErrParam().setErrDesc(valiResult);
+			}
+			
+		}catch(DatabaseException e)
+		{
+			throw new BusinessException(e);
+			
+		}
+		catch(Exception ex)
+		{
+			throw new BusinessException(ex);
+		}
+		
+		return response;
+	}
+	
+	// set Model to entity 
+	private void setModelToEntity(TbOsUserModel model, TbOsUserEntity entity)
+	{
+		entity.setRefId(model.getRefId() != null ? model.getRefId() : entity.getRefId());
+		entity.setPswd(model.getPswd() != null ? model.getPswd() : entity.getPswd());
+		entity.setFullNm(model.getFullNm() != null ? model.getFullNm() : entity.getFullNm());
+		entity.setDsplNm(model.getDsplNm() != null ? model.getDsplNm() : entity.getDsplNm());
+		entity.setEmail(model.getEmail() != null ? model.getEmail() : entity.getEmail());
+		entity.setCntctInfo(model.getCntctInfo() != null ? model.getCntctInfo() : entity.getCntctInfo());
+		entity.setCntctNum(model.getCntctNumber() != null ? model.getCntctNumber() : entity.getCntctNum());
+		entity.setLocation(model.getLocation() != null ? model.getLocation() : entity.getLocation());
+		entity.setFldLgnCnt(model.getFldLgnCnt() != null ? model.getFldLgnCnt() : entity.getFldLgnCnt());
+		entity.setLstLgnTs(model.getLstLgnCnt() != null ? model.getLstLgnCnt() : entity.getLstLgnTs());
+		entity.setExprTs(model.getExprTs() != null ? model.getExprTs() : entity.getExprTs());
+		entity.setPswdCrtBy(model.getPswdCrtBy() != null ? model.getPswdCrtBy() : entity.getPswdCrtBy());
+		entity.setUserState(model.getUserState() != null ? model.getUserState() : entity.getUserState());
+		entity.setSessionId(model.getSessionId() != null ? model.getSessionId() : entity.getSessionId());
+		entity.setLdapAuth(model.getLdapAuth() != null ? model.getLdapAuth() : entity.getLdapAuth());
+		entity.setSkipInactvn(model.getSkipInactvn() != null ? model.getSkipInactvn() : entity.getSkipInactvn());
+		entity.setDltBy(model.getDltBy() != null ? model.getDltBy() : entity.getDltBy());
+		entity.setDltTs(model.getDltTs() != null ? model.getDltTs() : entity.getDltTs());
+		entity.setEncKeyId(model.getEncKeyId() != null ? model.getEncKeyId() : entity.getEncKeyId());
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }

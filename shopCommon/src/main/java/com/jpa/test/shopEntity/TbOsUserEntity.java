@@ -24,8 +24,8 @@ public class TbOsUserEntity implements Serializable {
 	
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_OS_USER_GEN")
-	@SequenceGenerator(name = "SEQ_OS_USER_GEN", sequenceName = "SEQ_OS_USER", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_OS_USR_GEN" )
+	@SequenceGenerator(name = "SEQ_OS_USR_GEN", sequenceName = "SEQ_OS_USR", allocationSize = 1)
 	@Column(name = "ID")
 	private Long id;
 	
