@@ -3,6 +3,7 @@ package com.jpa.test.shopService;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -292,7 +293,43 @@ public class TbOsUserService {
 	
 	
 	
-	
+	//soft DeleteUser 
+	public ServiceOperationResult<TbOsUserModel> softDelete(TbOsUserModel model)
+	{
+		ServiceOperationResult<TbOsUserModel> response = new ServiceOperationResult<TbOsUserModel>();
+		try
+		{
+			
+			if(model.getId() == null)
+			{
+				throw new BusinessException("id must not be null : ");
+			}
+			TbOsUserEntity entity = userPersistance.findById(model.getId()).get();
+			
+			if(entity != null)
+			{
+				entity.setDltBy(model.getFullNm());
+				entity.setDltTs(new Date());
+				userPersistance.save(entity);
+				response.setResponse(model);
+			}
+			else
+			{
+				response.getErrParam().setErrCode("404");
+			}
+			
+			
+		}catch(DatabaseException e)
+		{
+			throw new BusinessException(e);
+		}
+		catch(Exception ex)
+		{
+			throw new BusinessException(ex);
+		}
+		
+		return response;
+	}
 	
 	
 	

@@ -48,14 +48,14 @@ public class TbOsUserController {
 			@RequestBody FilterParameter filter) {
 		ServiceOperationResult<List<TbOsUserModel>> result = new ServiceOperationResult<>();
 		//String userName = request.getUserPrincipal().getName();
-		 String servletPath = request.getServletPath();
+		 //String servletPath = request.getServletPath();
 		try {
 			result = userService.userList(filter);
 			validationHelper.checkValidationAndThrow(result);
 		} catch (Exception ex) {
 			LOGGER.error(CommonConstant.EXCEPTION_MSG_LIST, null, request.getServerName(), ex);
 
-			TbOsDbErrModel errModel = new TbOsDbErrModel(null, servletPath, dbErrService.SqlErrCode(ex),
+			TbOsDbErrModel errModel = new TbOsDbErrModel(null, null, dbErrService.SqlErrCode(ex),
 					ExceptionUtils.getStackTrace(ex), request.getUserPrincipal().getName());
 			dbErrService.save(errModel);
 
@@ -93,13 +93,37 @@ public class TbOsUserController {
 			result.getErrParam().setErrDesc(CommonConstant.ERRCONSTANT+request.getServletPath()+CommonConstant.LOGCONSTANT);
 			
 		}
-		
-		
-		
-		return result;
-		
+		return result;	
 	}
 	
 	
-
+	// soft Delete user
+	@RequestMapping(value = "/UsersoftDelete", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ServiceOperationResult<TbOsUserModel> softDelete(HttpServletRequest request, @RequestBody TbOsUserModel model)
+	{
+		ServiceOperationResult<TbOsUserModel> result = new ServiceOperationResult<>();
+		String servletPath = request.getServletPath();
+		try
+		{
+			result = userService.softDelete(model);
+			validationHelper.checkValidationAndThrow(result);
+			
+		}
+		catch(Exception e)
+		{
+			LOGGER.error(CommonConstant.EXCEPTION_MSG_LIST,null, servletPath,e);
+			TbOsDbErrModel errModel = new TbOsDbErrModel(null, servletPath, dbErrService.SqlErrCode(e), ExceptionUtils.getStackTrace(e), null);
+			dbErrService.save(errModel);
+			result = new ServiceOperationResult<>();
+			result.getErrParam().setErrCode(CommonConstant.NOCODE);
+			result.getErrParam().setErrDesc(CommonConstant.ERRCONSTANT+request.getServletPath()+CommonConstant.LOGCONSTANT);
+		}
+		
+		return result;
+	}
+	
+	
+	
+	
+	
 }
