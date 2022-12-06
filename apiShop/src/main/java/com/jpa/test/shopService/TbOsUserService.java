@@ -3,7 +3,6 @@ package com.jpa.test.shopService;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +24,8 @@ import com.jpa.test.exception.DatabaseException;
 import com.jpa.test.shopEntity.TbOsUserEntity;
 import com.jpa.test.shopModel.TbOsUserModel;
 import com.jpa.test.shopPersistance.TbOsUSerPersistance;
-import com.jpa.test.validationUtils.validationHelper;
+import com.jpa.test.SecurityUtility.SecurityHelper;
+import com.jpa.test.SecurityUtility.SecurityHelper.MessageDiagestUtil;
 
 import UtilModel.FilterParameter;
 
@@ -237,10 +237,27 @@ public class TbOsUserService {
 					entity.setId(null);
 					String password = CommonUtilityHelper.getAlphaNumericString(16);
 					entity.setPswd(password);
+					entity.setLdapAuth(model.getLdapAuth());
 					setModelToEntity(model, entity);
-					
+					entity.setRefId(CommonConstant.SCRIPT_USER);
 					entity.setCrtBy(model.getCrtBy());
 					entity.setCrtTs(new Date());
+					userPersistance.save(entity);
+					
+					if(StringUtils.equals(entity.getLdapAuth(), CommonConstant.N))
+					{
+						entity.setRefId(entity.getFullNm().substring(0, 2).toUpperCase()+entity.getId());
+						String hashpassword = entity.getRefId()+entity.getPswd();
+						entity.setPswd(MessageDiagestUtil.getHash256(hashpassword));
+						entity.setPswdCrtBy(CommonConstant.SCRIPT_USER);
+					}
+					else
+						if(StringUtils.equals(entity.getLdapAuth(), CommonConstant.Y))
+						{
+							entity.setRefId(model.getRefId());
+							String passw = entity.getRefId()+password;
+							entity.setCrtBy(CommonConstant.SCRIPT_USER);
+						}
 					userPersistance.save(entity);
 					
 				}
