@@ -16,32 +16,27 @@ public class SecurityHelper {
 	
 	public class PasswordSecurityCheck
 	{
-		private int len;
+		private int pLength;
 		 String pass;
 		 
 		 
-		 public PasswordSecurityCheck(int len, String pass)
+		 public PasswordSecurityCheck(String pass)
 		 {
-			 this.len = len;
+			 this.pLength = pass.length();
 			 this.pass = pass;
 		 }
 		 
-		 public void checkEmpty(String pass) throws Exception
-		 {
-			 if(pass.isEmpty())
-			 {
-				 throw new Exception("password field is empty : password is very insecure : ");
-			 }
-		 }
-		 
-		 
-		 public void checkLength(int l) throws Exception
-		 {
-			 if(len < l)
-			 {
-				 throw new Exception("password is less then "+len+" Character :");
-			 }
-		 }
+		 public void checkEmpty() throws Exception {
+				if (pass.isEmpty()) {
+					throw new Exception("Password Field is Empty! Password is Very Insecure.");
+				}
+			}
+
+			public void checkLenght(int len) throws Exception {
+				if (pLength < len) {
+					throw new Exception("Password Field is Less Than " + len + " Characters.");
+				}
+			}
 		 
 		 public void checkAlphaNumericPattern() throws Exception
 		 {
