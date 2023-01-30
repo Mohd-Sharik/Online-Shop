@@ -9,7 +9,7 @@ public class FilterParameter {
 		private @QueryParam("pageIndex") Integer pageIndex = 0;
 		private @QueryParam("pageName") String pageName = "";
 		private @QueryParam("recordToShowOnOnePage") Integer recordToShowOnOnePage = 25;
-		private @QueryParam("recordTotal") Long recordTotal;
+	 	private @QueryParam("recordTotal") Long recordTotal;
 		private @QueryParam("id") String id = "";
 		private @QueryParam("refCd") String refCd = "";
 		private @QueryParam("fullNm") String fullNm = "";

@@ -36,10 +36,30 @@
 		<javax.servlet-version>4.0.1</javax.servlet-version>
 		<spring-web-version>5.3.20</spring-web-version>
 		<API-shopSecurity-version>0.0.1-SNAPSHOT</API-shopSecurity-version>
+		<io.jsonwebtoken-jjwt-version>0.9.1</io.jsonwebtoken-jjwt-version>
+		<spring-boot-starter-security-version>2.7.7</spring-boot-starter-security-version>
+		
 
 
 	</properties>
 	<dependencies>
+
+
+<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security -->
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-security</artifactId>
+    <version>${spring-boot-starter-security-version}</version>
+</dependency>
+
+
+<!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt -->
+<dependency>
+    <groupId>io.jsonwebtoken</groupId>
+    <artifactId>jjwt</artifactId>
+    <version>${io.jsonwebtoken-jjwt-version}</version>
+</dependency>
+
 
 		<!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
 		<dependency>

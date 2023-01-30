@@ -51,5 +51,10 @@ public class TbOsUSerPersistance {
 	{
 		return userDao.findAll();
 	}
+	
+	public Optional<TbOsUserEntity> findByRefId(String refId)
+	{
+		return userDao.findByRefId(refId);
+	}
 
 }
