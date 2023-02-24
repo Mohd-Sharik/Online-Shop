@@ -55,6 +55,18 @@ public class SecurityHelper {
 	public static class MessageDiagestUtil
 	{
 		
+		
+		public static String getHash(String inputStr) throws NoSuchAlgorithmException {
+			String result = null;
+
+			if (StringUtils.isNotBlank(inputStr)) {
+				MessageDigest md = MessageDigest.getInstance(SecurityFrameworkConstant.SHA256);
+				byte[] bytes = md.digest(inputStr.getBytes());
+				result = byteArrayToHex(bytes);
+			}
+			return result;
+		}
+		
 		public static String getHash256(String str) throws NoSuchAlgorithmException
 		{
 			String result;

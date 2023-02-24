@@ -16,6 +16,7 @@ public class CommonConstant {
 	public static final String Y = "Y";
 	public static final String SCRIPT_USER = "SCRIPT_USER";
 	public static final String AUTH_TKN_KEY = "authToken";
+	public static final String SESSION_ID = "sessionUniqueId";
 	
 	public static final String ALPH_NMR_STR = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"+"abcdefghijklmnopqrstuvwxyz"+"#$%&*"+"1234567890";
 	

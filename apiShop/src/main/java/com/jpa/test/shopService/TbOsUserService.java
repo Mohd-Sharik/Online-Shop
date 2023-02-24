@@ -3,6 +3,7 @@ package com.jpa.test.shopService;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -348,7 +349,22 @@ public class TbOsUserService {
 		return response;
 	}
 	
-	
+	//find by id
+	public TbOsUserEntity findByRefId(String id)
+	{
+		try
+		{
+			Optional<TbOsUserEntity> user = userPersistance.findByRefId(id);
+			if(user.isPresent())
+			{
+				return user.get();
+			}
+			else
+				return null;
+		}catch (Exception e) {
+			throw new BusinessException(e);
+		}
+	}
 	
 	
 	
