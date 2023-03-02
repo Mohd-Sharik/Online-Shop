@@ -14,7 +14,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import Usermanagement.LoginService;
-import net.bytebuddy.implementation.bind.annotation.Super;
 
 @Configuration
 @EnableWebSecurity
