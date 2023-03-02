@@ -236,7 +236,7 @@ public class TbOsUserService {
 				{
 					TbOsUserEntity entity = new TbOsUserEntity();
 					entity.setId(null);
-					String password = CommonUtilityHelper.getAlphaNumericString(16);
+					String password =  CommonConstant.NOCODE; //CommonUtilityHelper.getAlphaNumericString(16);
 					entity.setPswd(password);
 					entity.setLdapAuth(model.getLdapAuth());
 					setModelToEntity(model, entity);
@@ -249,7 +249,7 @@ public class TbOsUserService {
 					{
 						entity.setRefId(entity.getFullNm().substring(0, 2).toUpperCase()+entity.getId());
 						String hashpassword = entity.getRefId()+entity.getPswd();
-						entity.setPswd(MessageDiagestUtil.getHash256(hashpassword));
+						entity.setPswd(MessageDiagestUtil.getHash(hashpassword));
 						entity.setPswdCrtBy(CommonConstant.SCRIPT_USER);
 					}
 					else

@@ -59,6 +59,7 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
 		return new BCryptPasswordEncoder();
 	}
 	
+	//@SuppressWarnings("deprecation")
 	@Bean
 	public AuthenticationManager authenticationManagerBean() throws Exception
 	{
