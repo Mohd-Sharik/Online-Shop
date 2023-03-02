@@ -41,12 +41,12 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.setHeader("Access-Control-Request-Headers",
-				"authtoken,Content-Type, Content-Length, X-Requested-With,userId,bankKey,bankId,systemId,cmpnyNm,cmpnyId,sessionUniqueId,SELECTED_APP");
-		response.setHeader("Access-Control-Allow-Headers",
-				"authtoken,Content-Type, Content-Length, X-Requested-With,userId,bankKey,bankId,systemId,cmpnyNm,cmpnyId,sessionUniqueId,SELECTED_APP");
-		response.setHeader("Access-Control-Allow-origin", "*");
-		response.setHeader("Access-Control-Allow-Methods", "GET, POST, DELETE");
+//		response.setHeader("Access-Control-Request-Headers",
+//				"authtoken,Content-Type, Content-Length, X-Requested-With,userId,bankKey,bankId,systemId,cmpnyNm,cmpnyId,sessionUniqueId,SELECTED_APP");
+//		response.setHeader("Access-Control-Allow-Headers",
+//				"authtoken,Content-Type, Content-Length, X-Requested-With,userId,bankKey,bankId,systemId,cmpnyNm,cmpnyId,sessionUniqueId,SELECTED_APP");
+//		response.setHeader("Access-Control-Allow-origin", "*");
+//		response.setHeader("Access-Control-Allow-Methods", "GET, POST, DELETE");
 
 		final String requestTokenHeader = request.getHeader(CommonConstant.AUTH_TKN_KEY);
 
@@ -88,7 +88,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 			}
 
 		}
-		LoggerContext.setUserId(username);
+		//LoggerContext.setUserId(username);
 
 		LOGGER.info("START :: Accessed API {} ", request.getServletPath());
 

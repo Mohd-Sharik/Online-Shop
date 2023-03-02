@@ -60,7 +60,7 @@ public class SecurityHelper {
 			String result = null;
 
 			if (StringUtils.isNotBlank(inputStr)) {
-				MessageDigest md = MessageDigest.getInstance(SecurityFrameworkConstant.SHA256);
+				MessageDigest md = MessageDigest.getInstance(SecurityConstantsUtils.SHA256);
 				byte[] bytes = md.digest(inputStr.getBytes());
 				result = byteArrayToHex(bytes);
 			}

@@ -5,9 +5,11 @@ import java.security.NoSuchAlgorithmException;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
+import org.bouncycastle.jcajce.util.MessageDigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -51,7 +53,7 @@ public class LoginController {
 	private AuthenticationManager authenticationManager;
 
 	
-	@RequestMapping(value = "do", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/do", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public LoginResponce getLoginCredential(@RequestBody Loginrequest loginRequest, HttpServletRequest request)
 			throws ParseException, NoSuchAlgorithmException {
 		LoginResponce loginResponse = new LoginResponce();
@@ -74,6 +76,13 @@ public class LoginController {
 				return loginResponse;
 
 			}
+			
+			String hasInput = userId + loginRequest.getPassword();
+			String password = "";
+			
+			password = MessageDiagestUtil.getHash(hasInput);
+			authenticate(userId, password);
+			
 			loginResponse.setDsplNm(user.getDsplNm());
 			final UserDetails userDetail = loginService.loadUserByUsername(userId);
 			String authTocken = jwtTokenUtil.generateToken(userDetail);
@@ -81,8 +90,9 @@ public class LoginController {
 			loginResponse.setIsAuthUser(true);
 			loginResponse.setPassCrtBy(user.getPswdCrtBy());
 			
+			
+			
 		} catch (Exception e) {
-			// TODO: handle exception
 			LOG.error("Exception Occure during login time : ",request.getServletPath(), e);
 			
 			loginResponse.setErrorMessage(e.getMessage());
@@ -91,6 +101,17 @@ public class LoginController {
 		}
 
 		return loginResponse;
+	}
+	
+	
+	private void authenticate(String username, String password) {
+		try {
+			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
+			
+		} catch (Exception e) {
+			LOG.error("Error in authenticate {} ", e.getCause());
+			
+		}
 	}
 
 }
