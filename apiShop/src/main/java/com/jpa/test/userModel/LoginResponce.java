@@ -1,4 +1,4 @@
-package userModel;
+package com.jpa.test.userModel;
 
 public class LoginResponce {
 	
@@ -31,9 +31,12 @@ public class LoginResponce {
 	public void setDsplNm(String dsplNm) {
 		this.dsplNm = dsplNm;
 	}
+	
+	
 	public String getAuthToken() {
 		return authToken;
 	}
+	
 	public void setAuthToken(String authToken) {
 		this.authToken = authToken;
 	}

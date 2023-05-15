@@ -1,4 +1,4 @@
-package Usermanagement;
+package com.jpa.test.usermanagement;
 
 import java.util.ArrayList;
 
@@ -23,7 +23,7 @@ public class LoginService implements UserDetailsService {
 	private PasswordEncoder passwordEncoder;
 	
 	private static final String NotFound = "User Not Found With : ";
-
+	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		// TODO Auto-generated method stub
@@ -61,5 +61,17 @@ public class LoginService implements UserDetailsService {
 		}
 		
 	}
+	
+//	@Override
+//	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+//		if(username.equals("sharik"))
+//		{
+//			return new User("sharik","sharik123", new ArrayList<>());
+//		}
+//		else
+//		{
+//			throw new UsernameNotFoundException("User not found ! ");
+//		}
+//	}
 
 }

@@ -1,4 +1,4 @@
-package SecurityFilter;
+package com.jps.test.securityFilter;
 
 import java.io.IOException;
 

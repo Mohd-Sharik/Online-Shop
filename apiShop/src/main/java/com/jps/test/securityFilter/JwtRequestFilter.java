@@ -1,4 +1,4 @@
-package SecurityFilter;
+package com.jps.test.securityFilter;
 
 import java.io.IOException;
 
@@ -20,9 +20,8 @@ import com.jpa.test.commonUtilMethods.CommonConstant;
 import com.jpa.test.loggingShopLogging.ILogger;
 import com.jpa.test.loggingShopLogging.LoggerContext;
 import com.jpa.test.loggingShopLogging.LoggerFactory;
+import com.jpa.test.usermanagement.LoginService;
 
-
-import Usermanagement.LoginService;
 import io.jsonwebtoken.ExpiredJwtException;
 
 @Component
@@ -40,13 +39,6 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-//		response.setHeader("Access-Control-Request-Headers",
-//				"authtoken,Content-Type, Content-Length, X-Requested-With,userId,bankKey,bankId,systemId,cmpnyNm,cmpnyId,sessionUniqueId,SELECTED_APP");
-//		response.setHeader("Access-Control-Allow-Headers",
-//				"authtoken,Content-Type, Content-Length, X-Requested-With,userId,bankKey,bankId,systemId,cmpnyNm,cmpnyId,sessionUniqueId,SELECTED_APP");
-//		response.setHeader("Access-Control-Allow-origin", "*");
-//		response.setHeader("Access-Control-Allow-Methods", "GET, POST, DELETE");
 
 		final String requestTokenHeader = request.getHeader(CommonConstant.AUTH_TKN_KEY);
 
@@ -90,11 +82,11 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 		}
 		//LoggerContext.setUserId(username);
 
-		LOGGER.info("START :: Accessed API {} ", request.getServletPath());
+		//LOGGER.info("START :: Accessed API {} ", request.getServletPath());
 
 		filterChain.doFilter(request, response);
 
-		LOGGER.info("END :: Served API {} ", request.getServletPath());
+		//LOGGER.info("END :: Served API {} ", request.getServletPath());
 	}
 
 }

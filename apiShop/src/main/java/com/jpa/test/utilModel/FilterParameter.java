@@ -1,4 +1,4 @@
-package UtilModel;
+package com.jpa.test.utilModel;
 
 import javax.ws.rs.QueryParam;
 

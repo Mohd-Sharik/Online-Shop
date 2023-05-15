@@ -1,4 +1,4 @@
-package Usermanagement;
+package com.jpa.test.usermanagement;
 
 import java.security.NoSuchAlgorithmException;
 
@@ -8,9 +8,11 @@ import org.apache.commons.lang3.StringUtils;
 import org.bouncycastle.jcajce.util.MessageDigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,12 +25,12 @@ import com.jpa.test.loggingShopLogging.LoggerFactory;
 import com.jpa.test.shopEntity.TbOsUserEntity;
 import com.jpa.test.shopService.TbOsDbErrService;
 import com.jpa.test.shopService.TbOsUserService;
+import com.jpa.test.userModel.LoginResponce;
+import com.jpa.test.userModel.Loginrequest;
+import com.jps.test.securityFilter.JwtTokenUtil;
 import com.sun.xml.messaging.saaj.packaging.mime.internet.ParseException;
 
-import SecurityFilter.JwtTokenUtil;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
-import userModel.LoginResponce;
-import userModel.Loginrequest;
 
 @CrossOrigin
 @RestController
@@ -43,8 +45,8 @@ public class LoginController {
 	@Autowired
 	private LoginService loginService;
 
-	@Autowired
-	private TbOsDbErrService dbErrService;
+//	@Autowired
+//	private TbOsDbErrService dbErrService;
 
 	@Autowired
 	private TbOsUserService userService;
@@ -53,13 +55,25 @@ public class LoginController {
 	private AuthenticationManager authenticationManager;
 
 	
+	@CrossOrigin
 	@RequestMapping(value = "/do", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public LoginResponce getLoginCredential(@RequestBody Loginrequest loginRequest, HttpServletRequest request)
 			throws ParseException, NoSuchAlgorithmException {
+		
+//		
+//		try
+//		{
+//			String username = loginRequest.getUsername();
+//			String password = loginRequest.getPassword();
+//			
+//			this.authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
+		
+		
+		
 		LoginResponce loginResponse = new LoginResponce();
 
 		String userId = loginRequest.getUsername();
-		String sessionId = request.getHeader(CommonConstant.SESSION_ID);
+		//String sessionId = request.getHeader(CommonConstant.SESSION_ID);
 		try {
 			TbOsUserEntity user = userService.findByRefId(userId);
 
@@ -92,8 +106,10 @@ public class LoginController {
 			
 			
 			
-		} catch (Exception e) {
+		} catch (UsernameNotFoundException e) {
 			LOG.error("Exception Occure during login time : ",request.getServletPath(), e);
+//			ex.printStackTrace();
+//			throw new Exception("Bad credintial ! ");
 			
 			loginResponse.setErrorMessage(e.getMessage());
 			return loginResponse;
@@ -101,6 +117,12 @@ public class LoginController {
 		}
 
 		return loginResponse;
+		
+//		 UserDetails userdetai = this.loginService.loadUserByUsername(loginRequest.getUsername());
+//		 String token = this.jwtTokenUtil.generateToken(userdetai);
+//		 
+//		 return ResponseEntity.ok(new LoginResponce(token));
+		 
 	}
 	
 	

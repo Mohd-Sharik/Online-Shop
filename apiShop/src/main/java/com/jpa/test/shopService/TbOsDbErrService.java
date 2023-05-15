@@ -25,8 +25,7 @@ import com.jpa.test.exception.DatabaseException;
 import com.jpa.test.shopEntity.TbOsDbErrEntity;
 import com.jpa.test.shopModel.TbOsDbErrModel;
 import com.jpa.test.shopPersistance.TbOsDbErrPersistance;
-
-import UtilModel.FilterParameter;
+import com.jpa.test.utilModel.FilterParameter;
 
 @Service
 public class TbOsDbErrService {

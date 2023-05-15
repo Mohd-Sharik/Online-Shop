@@ -25,9 +25,8 @@ import com.jpa.test.shopModel.TbOsDbErrModel;
 import com.jpa.test.shopModel.TbOsUserModel;
 import com.jpa.test.shopService.TbOsDbErrService;
 import com.jpa.test.shopService.TbOsUserService;
+import com.jpa.test.utilModel.FilterParameter;
 import com.jpa.test.validationUtils.validationHelper;
-
-import UtilModel.FilterParameter;
 
 @RestController
 @CrossOrigin

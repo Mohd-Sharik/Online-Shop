@@ -25,10 +25,9 @@ import com.jpa.test.exception.DatabaseException;
 import com.jpa.test.shopEntity.TbOsUserEntity;
 import com.jpa.test.shopModel.TbOsUserModel;
 import com.jpa.test.shopPersistance.TbOsUSerPersistance;
+import com.jpa.test.utilModel.FilterParameter;
 import com.jpa.test.SecurityUtility.SecurityHelper;
 import com.jpa.test.SecurityUtility.SecurityHelper.MessageDiagestUtil;
-
-import UtilModel.FilterParameter;
 
 @Service
 public class TbOsUserService {
@@ -37,7 +36,7 @@ public class TbOsUserService {
 	private TbOsUSerPersistance userPersistance;
 
 	// getting list of User Detail's
-	public ServiceOperationResult<List<TbOsUserModel>> userList(FilterParameter filter) {
+	public ServiceOperationResult<List<TbOsUserModel>> userList(FilterParameter filter) throws BusinessException  {
 		ServiceOperationResult<List<TbOsUserModel>> response = new ServiceOperationResult<>();
 		try {
 			DatabaseOperationResult<List<TbOsUserEntity>> dbList = userDb(filter);

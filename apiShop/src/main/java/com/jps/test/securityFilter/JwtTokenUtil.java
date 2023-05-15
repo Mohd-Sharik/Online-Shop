@@ -1,4 +1,4 @@
-package SecurityFilter;
+package com.jps.test.securityFilter;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -26,6 +26,7 @@ public class JwtTokenUtil implements Serializable {
 	
 	private static final long JWT_TOKEN_VALIDITY = 5L * 60 * 60;
 
+	//private String secret = "hellojava";
 
 	private String secret = new SecretKeySpec(DatatypeConverter.parseBase64Binary("A1h2j9u5y7"),
 			SignatureAlgorithm.HS512.getJcaName()).toString();

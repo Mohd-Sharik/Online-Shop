@@ -1,4 +1,4 @@
-package userModel;
+package com.jpa.test.userModel;
 
 public class Loginrequest {
 	
