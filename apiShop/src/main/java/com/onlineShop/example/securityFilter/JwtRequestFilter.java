@@ -21,6 +21,7 @@
 //import com.onlineShop.example.loggingShopLogging.LoggerContext;
 //import com.onlineShop.example.loggingShopLogging.LoggerFactory;
 //import com.onlineShop.example.usermanagement.LoginService;
+//import com.onlineShop.example.util.JwtTokenUtil;
 //
 //import io.jsonwebtoken.ExpiredJwtException;
 //
@@ -37,7 +38,7 @@
 //
 //	@CrossOrigin
 //	@Override
-//	protected void doFilterInternal(final HttpServletRequest request,final HttpServletResponse response,final FilterChain filterChain)
+//	protected void doFilterInternal( HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 //			throws ServletException, IOException {
 //		
 //
@@ -82,13 +83,13 @@
 //			}
 //
 //		}
-//		LoggerContext.setUserId(username);
+//		//LoggerContext.setUserId(username);
 //
-//		LOGGER.info("START :: Accessed API {} ", request.getServletPath());
+//		//LOGGER.info("START :: Accessed API {} ", request.getServletPath());
 //
 //		filterChain.doFilter(request, response);
 //
-//		LOGGER.info("END :: Served API {} ", request.getServletPath());
+//		//LOGGER.info("END :: Served API {} ", request.getServletPath());
 //	}
 //
 //}
