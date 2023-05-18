@@ -24,21 +24,21 @@ import com.onlineShop.example.usermanagement.LoginService;
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+//@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class MySecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	
 	
 	@Autowired
 	private JwtAuthenticationEntryPoint jwtAuthenticationPoint;
-	@Autowired
-	private JwtRequestFilter jwtRequestFilter;
+//	@Autowired
+//	private JwtRequestFilter jwtRequestFilter;
 	
 	@Autowired
 	private UserDetailsService userDataillService;
 	
-//	@Autowired
-//	private LoginService loginService;
+	@Autowired
+	private LoginService loginService;
 	
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
@@ -59,7 +59,8 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
 //	}
 	
 	//@SuppressWarnings("deprecation")
-	@Bean//(name = BeanIds.AUTHENTICATION_MANAGER)
+	@Bean
+	//(name = BeanIds.AUTHENTICATION_MANAGER)
 	@Override
 	public AuthenticationManager authenticationManagerBean() throws Exception
 	{
@@ -81,7 +82,7 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
 				.and().sessionManagement()
 				.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
-		http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+		//http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
 		
 //		.csrf()
 //		.disable()

@@ -1,18 +1,18 @@
 package com.onlineShop.example.model;
 
-public class Loginrequest {
+public class LoginRequest {
 	
 	private String username;
 	private String password;
 	
 	
-	public Loginrequest() {
+	public LoginRequest() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
 
-	public Loginrequest(String username, String password) {
+	public LoginRequest(String username, String password) {
 		super();
 		this.username = username;
 		this.password = password;

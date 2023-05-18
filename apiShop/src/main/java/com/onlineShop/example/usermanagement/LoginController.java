@@ -14,6 +14,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,14 +24,13 @@ import com.onlineShop.example.commonUtilMethods.CommonConstant;
 import com.onlineShop.example.loggingShopLogging.ILogger;
 import com.onlineShop.example.loggingShopLogging.LoggerFactory;
 import com.onlineShop.example.model.LoginResponce;
-import com.onlineShop.example.model.Loginrequest;
+import com.onlineShop.example.model.LoginRequest;
 import com.onlineShop.example.securityFilter.JwtTokenUtil;
 import com.onlineShop.example.service.TbOsDbErrService;
 import com.onlineShop.example.service.TbOsUserService;
 import com.onlineShop.example.shopEntity.TbOsUserEntity;
 import com.sun.xml.messaging.saaj.packaging.mime.internet.ParseException;
 
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
 @CrossOrigin
 @RestController
@@ -57,8 +57,9 @@ public class LoginController {
 	
 	@CrossOrigin
 	@RequestMapping(value = "/do", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public LoginResponce getLoginCredential(@RequestBody Loginrequest loginRequest, HttpServletRequest request)
+	public LoginResponce getLoginCredential(@RequestBody LoginRequest loginRequest, HttpServletRequest request)
 			throws ParseException, NoSuchAlgorithmException {
+		System.out.println("step 1");
 		
 //		
 //		try
@@ -72,8 +73,10 @@ public class LoginController {
 		
 		LoginResponce loginResponse = new LoginResponce();
 
-		String userId = loginRequest.getUsername();
+		//String userId = "SRK1";
+		String userId = loginRequest.getUsername();  
 		//String sessionId = request.getHeader(CommonConstant.SESSION_ID);
+		System.out.println("step 2");
 		try {
 			TbOsUserEntity user = userService.findByRefId(userId);
 
@@ -91,6 +94,7 @@ public class LoginController {
 
 			}
 			
+			//String hasInput = "SRK1" + "sharik@123";
 			String hasInput = userId + loginRequest.getPassword();
 			String password = "";
 			

@@ -1,4 +1,4 @@
-package com.onlineShop.example.contriller;
+package com.onlineShop.example.controller;
 //package com.jpa.test.shopControoler;
 //
 //import java.security.MessageDigest;

@@ -25,7 +25,7 @@ public class LoginService implements UserDetailsService {
 	private static final String NotFound = "User Not Found With : ";
 	
 	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+	public UserDetails loadUserByUsername(String username)  {
 		// TODO Auto-generated method stub
 		TbOsUserEntity entity = null;
 		
