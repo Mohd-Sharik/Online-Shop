@@ -5,10 +5,8 @@ import java.security.NoSuchAlgorithmException;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
-import org.bouncycastle.jcajce.util.MessageDigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -20,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.onlineShop.example.SecurityUtility.SecurityHelper.MessageDiagestUtil;
-import com.onlineShop.example.commonUtilMethods.CommonConstant;
 import com.onlineShop.example.loggingShopLogging.ILogger;
 import com.onlineShop.example.loggingShopLogging.LoggerFactory;
 import com.onlineShop.example.model.LoginResponce;
@@ -41,16 +38,12 @@ public class LoginController {
 
 	@Autowired
 	private JwtTokenUtil jwtTokenUtil;
-
 	@Autowired
 	private LoginService loginService;
-
 //	@Autowired
 //	private TbOsDbErrService dbErrService;
-
 	@Autowired
 	private TbOsUserService userService;
-
 	@Autowired
 	private AuthenticationManager authenticationManager;
 

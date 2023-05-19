@@ -1,6 +1,7 @@
 package com.onlineShop.example.securityFilter;
 
 import java.io.IOException;
+import java.io.Serializable;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -15,7 +16,9 @@ import org.springframework.stereotype.Component;
  * then it will return bed news/response to user's
 */
 @Component
-public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
+public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint,Serializable {
+	
+	private static final long serialVersionUID = -7858869558953243875L;
 
 	@Override
 	public void commence(HttpServletRequest request, HttpServletResponse response,
