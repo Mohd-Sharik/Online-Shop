@@ -25,13 +25,10 @@ import com.onlineShop.example.usermanagement.LoginService;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class MySecurityConfig extends WebSecurityConfigurerAdapter {
 	
-	
-	
 	@Autowired
 	private JwtAuthenticationEntryPoint jwtAuthenticationPoint;
 	@Autowired
 	private JwtRequestFilter jwtRequestFilter;
-	
 	@Autowired
 	private LoginService loginService;
 	
@@ -54,7 +51,7 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 	
 	
-	//@Override
+	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http 
 		
