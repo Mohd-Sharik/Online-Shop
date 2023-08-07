@@ -15,53 +15,51 @@ import com.onlineShop.example.shopPersistance.TbOsUSerPersistance;
 
 @Service
 public class LoginService implements UserDetailsService {
-	
+
 	@Autowired
 	private TbOsUSerPersistance userPersistance;
-	
+
 	@Autowired
 	private PasswordEncoder passwordEncoder;
-	
+
 	private static final String NotFound = "User Not Found With : ";
-	
+	/*
+	 * @Override public UserDetails loadUserByUsername(String username) throws
+	 * UsernameNotFoundException { if ("javainuse".equals(username)) { return new
+	 * User("javainuse",
+	 * "$2a$10$slYQmyNdGzTn7ZLBXBChFOC9f6kFjAqPhccnP6DxlWXx2lPk1C3G6", new
+	 * ArrayList<>()); } else { throw new
+	 * UsernameNotFoundException("User not found with username: " + username); } }
+	 */
+
 	@Override
-	public UserDetails loadUserByUsername(String username)  {
-		// TODO Auto-generated method stub
-		TbOsUserEntity entity = null;
-		
-		try
-		{
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException { 
+                     TbOsUserEntity entity = null;
+
+		try {
 			entity = userPersistance.findByRefId(username).get();
+		} catch (Exception ex) {
+			throw new UsernameNotFoundException(NotFound + username);
 		}
-		catch(Exception ex)
-		{
-			throw new UsernameNotFoundException(NotFound+username);
-		}
-		
+
 		String userId = null;
 		String password = null;
-		
-		if(entity.getRefId() != null && entity.getPswd() != null)
-		{
-			
+
+		if (entity.getRefId() != null && entity.getPswd() != null) {
+
 			userId = entity.getRefId();
 			password = entity.getPswd();
-			if(entity.getRefId().equals(username))
-			{
+			if (entity.getRefId().equals(username)) {
 				return new User(userId, passwordEncoder.encode(password), new ArrayList<>());
+			} else {
+				throw new UsernameNotFoundException(NotFound + username);
 			}
-			else
-			{
-				throw new UsernameNotFoundException(NotFound+username);
-			}
+		} else {
+			throw new UsernameNotFoundException(NotFound + username);
 		}
-		else
-		{
-			throw new UsernameNotFoundException(NotFound+username);
-		}
-		
+
 	}
-	
+
 //	@Override
 //	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 //		if(username.equals("sharik"))

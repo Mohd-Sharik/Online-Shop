@@ -29,7 +29,7 @@ public class TbOsUserModel {
 	private String updBy;
 	private Date dltTs;
 	private String dltBy;
-	private Long encKeyId;
+	//private Long encKeyId;
 	
 	private String UpdTsString;
 	private String CrtTsString;
@@ -174,13 +174,13 @@ public class TbOsUserModel {
 	public void setDltBy(String dltBy) {
 		this.dltBy = dltBy;
 	}
-	public Long getEncKeyId() {
-		return encKeyId;
-	}
-	public void setEncKeyId(Long encKeyId) {
-		this.encKeyId = encKeyId;
-	}
-	
+//	public Long getEncKeyId() {
+//		return encKeyId;
+//	}
+//	public void setEncKeyId(Long encKeyId) {
+//		this.encKeyId = encKeyId;
+//	}
+//	
 	
 	
 	

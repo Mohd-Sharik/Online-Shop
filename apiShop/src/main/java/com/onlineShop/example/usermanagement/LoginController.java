@@ -10,6 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -38,22 +39,43 @@ public class LoginController {
 
 	@Autowired
 	private JwtTokenUtil jwtTokenUtil;
-	@Autowired
-	private LoginService loginService;
+	//@Autowired
+	//private LoginService loginService;
 //	@Autowired
 //	private TbOsDbErrService dbErrService;
-	@Autowired
-	private TbOsUserService userService;
+	//@Autowired
+	//private TbOsUserService userService;
 	@Autowired
 	private AuthenticationManager authenticationManager;
+	
+	@Autowired
+	private UserDetailsService jwtInMemoryUserDetailsService;
 
 	
 	@CrossOrigin
 	@RequestMapping(value = "/do", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public LoginResponce getLoginCredential(@RequestBody LoginRequest loginRequest, HttpServletRequest request)
 			throws ParseException, NoSuchAlgorithmException {
+
+    LoginResponce log = new LoginResponce();
+	String userId = loginRequest.getUsername();
+	String hasInput = userId + loginRequest.getPassword();
+	String password = "";
+	
+	password = MessageDiagestUtil.getHash(hasInput);
+	authenticate(userId, password);
+
+	final UserDetails userDetails = jwtInMemoryUserDetailsService.loadUserByUsername(userId);
+	final String token =  jwtTokenUtil.generateToken(userDetails);
+	log.setAuthToken(token);
+	
+	return log;
+	
+	
+	
+	
 		
-		LoginResponce loginResponse = new LoginResponce();
+		/*LoginResponce loginResponse = new LoginResponce();
 		String userId = loginRequest.getUsername();  
 		
 		try {
@@ -93,7 +115,7 @@ public class LoginController {
 			
 		}
 
-		return loginResponse;
+		return loginResponse;*/
 	}
 	
 	

@@ -235,7 +235,7 @@ public class TbOsUserService {
 				{
 					TbOsUserEntity entity = new TbOsUserEntity();
 					entity.setId(null);
-					String password =  CommonConstant.NOCODE; //CommonUtilityHelper.getAlphaNumericString(16);
+					String password =  CommonUtilityHelper.getAlphaNumericString(12); //CommonUtilityHelper.getAlphaNumericString(16);
 					entity.setPswd(password);
 					entity.setLdapAuth(model.getLdapAuth());
 					setModelToEntity(model, entity);
@@ -256,6 +256,7 @@ public class TbOsUserService {
 						{
 							entity.setRefId(model.getRefId());
 							String passw = entity.getRefId()+password;
+							entity.setPswd(MessageDiagestUtil.getHash(passw));
 							entity.setCrtBy(CommonConstant.SCRIPT_USER);
 						}
 					userPersistance.save(entity);
@@ -305,7 +306,7 @@ public class TbOsUserService {
 		entity.setSkipInactvn(model.getSkipInactvn() != null ? model.getSkipInactvn() : entity.getSkipInactvn());
 		entity.setDltBy(model.getDltBy() != null ? model.getDltBy() : entity.getDltBy());
 		entity.setDltTs(model.getDltTs() != null ? model.getDltTs() : entity.getDltTs());
-		entity.setEncKeyId(model.getEncKeyId() != null ? model.getEncKeyId() : entity.getEncKeyId());
+		//entity.setEncKeyId(model.getEncKeyId() != null ? model.getEncKeyId() : entity.getEncKeyId());
 	}
 	
 	

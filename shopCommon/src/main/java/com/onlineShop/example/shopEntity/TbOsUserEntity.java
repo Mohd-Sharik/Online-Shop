@@ -95,8 +95,8 @@ public class TbOsUserEntity implements Serializable {
 	@Column(name = "DLT_BY")
 	private String dltBy;
 	
-	@Column(name = "ENC_KEY_ID")
-	private Long encKeyId;
+//	@Column(name = "ENC_KEY_ID")
+//	private Long encKeyId;
 
 	public Long getId() {
 		return id;
@@ -282,14 +282,14 @@ public class TbOsUserEntity implements Serializable {
 		this.dltBy = dltBy;
 	}
 
-	public Long getEncKeyId() {
-		return encKeyId;
-	}
-
-	public void setEncKeyId(Long encKeyId) {
-		this.encKeyId = encKeyId;
-	}
-	
+//	public Long getEncKeyId() {
+//		return encKeyId;
+//	}
+//
+//	public void setEncKeyId(Long encKeyId) {
+//		this.encKeyId = encKeyId;
+//	}
+//	
 	
 	
 	
