@@ -30,9 +30,6 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
 	private JwtAuthenticationEntryPoint jwtAuthenticationPoint;
 	@Autowired
 	private JwtRequestFilter jwtRequestFilter;
-	//@Autowired
-	//private LoginService loginService;
-	
 	@Autowired
 	private UserDetailsService jwtUserDetailsService;
 
@@ -72,27 +69,5 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
 		// Add a filter to validate the tokens with every request
 		httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
 	}
-	
-	/*@Override
-	protected void configure(HttpSecurity httpsecurity) throws Exception {
-	
-		httpsecurity.csrf()
-		.disable()
-		.authorizeRequests()
-		.antMatchers("/login/do")		
-		.permitAll()
-		.anyRequest()
-		.authenticated()
-		.and()
-		.exceptionHandling()
-		.authenticationEntryPoint(jwtAuthenticationPoint)
-		.and()
-		.sessionManagement()
-		.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-
-		httpsecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
-				
 		
-	}*/
-	
 }
